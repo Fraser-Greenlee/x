@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrolling Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            margin-bottom: 50px;
+        }
+
+        .scroll-box {
+            border: 1px solid #333;
+            overflow: auto;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .vertical-scroll {
+            width: 300px;
+            height: 200px;
+            overflow-y: scroll;
+        }
+
+        .horizontal-scroll {
+            width: 300px;
+            height: 100px;
+            overflow-x: scroll;
+            white-space: nowrap;
+        }
+
+        .both-scroll {
+            width: 300px;
+            height: 200px;
+            overflow: scroll;
+        }
+
+        .content {
+            width: 1000px;
+            height: 1000px;
+            background-image: linear-gradient(to bottom right, #ff9999, #9999ff);
+        }
+
+        .horizontal-content {
+            width: 1000px;
+        }
+
+        .vertical-content {
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Vertical Scrolling</h2>
+        <div class="scroll-box vertical-scroll">
+            <div class="vertical-content">
+                This box has vertical scrolling. Scroll down to see more content.
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Horizontal Scrolling</h2>
+        <div class="scroll-box horizontal-scroll">
+            <div class="horizontal-content">
+                This box has horizontal scrolling. Scroll to the right to see more content.
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Horizontal + Vertical Scrolling</h2>
+        <div class="scroll-box both-scroll">
+            <div class="content">
+                This box has both horizontal and vertical scrolling. Scroll in any direction to explore.
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
