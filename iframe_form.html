@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form in Iframe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        iframe {
+            width: 400px;
+            height: 250px;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Form in Iframe Example</h1>
+
+    <!-- Iframe using srcdoc to embed form directly in the HTML file -->
+    <iframe srcdoc="
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Form</title>
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    padding: 10px;
+                }
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+            </style>
+        </head>
+        <body>
+            <form action='#' method='post'>
+                <label for='name'>Name:</label>
+                <input type='text' id='name' name='name' required>
+
+                <label for='options'>Choose an option:</label>
+                <select id='options' name='options' required>
+                    <option value=''>--Please select an option--</option>
+                    <option value='option1'>Option 1</option>
+                    <option value='option2'>Option 2</option>
+                    <option value='option3'>Option 3</option>
+                </select>
+
+                <button type='submit'>Submit</button>
+            </form>
+        </body>
+        </html>
+    ">
+    </iframe>
+
+</body>
+
+</html>
