@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Grid</title>
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
+
         #button-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, 120px);
-            width: 100vw;
-            height: 100vh;
+            width: calc(100vw + 120px);
+            height: calc(100vh + 120px);
         }
+
         .grid-button {
             width: 120px;
             height: 120px;
             border: none;
         }
-        .extra-row-button, .extra-column-button {
-            height: auto; /* Allow these buttons to adjust height */
+
+        .extra-row-button,
+        .extra-column-button {
+            height: auto;
+            /* Allow these buttons to adjust height */
         }
     </style>
 </head>
+
 <body>
     <div id="button-container"></div>
 
@@ -47,10 +56,8 @@
             const screenHeight = window.innerHeight;
 
             // Calculate the number of buttons that fit horizontally and vertically
-            const cols = Math.floor(screenWidth / 120);
-            const rows = Math.floor(screenHeight / 120);
-            const leftoverWidth = screenWidth % 120;
-            const leftoverHeight = screenHeight % 120;
+            const cols = Math.floor((screenWidth + 120) / 120) + 1;
+            const rows = Math.floor((screenHeight + 120) / 120) + 1;
 
             // Calculate the total number of buttons (for full rows and columns)
             const totalButtons = cols * rows;
@@ -71,56 +78,6 @@
 
                 buttonContainer.appendChild(button);
             }
-
-            // If there is leftover height, create an extra row
-            if (leftoverHeight > 0) {
-                for (let i = 0; i < cols; i++) {
-                    const extraButton = document.createElement('button');
-                    extraButton.className = 'grid-button extra-row-button';
-                    extraButton.style.height = `${leftoverHeight}px`; // Set the height to leftover space
-                    extraButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
-
-                    // Add click event listener to turn the button black
-                    extraButton.addEventListener('click', () => {
-                        extraButton.style.backgroundColor = 'black';
-                    });
-
-                    buttonContainer.appendChild(extraButton);
-                }
-            }
-
-            // If there is leftover width, create an extra column
-            if (leftoverWidth > 0) {
-                for (let i = 0; i < rows; i++) {
-                    const extraButton = document.createElement('button');
-                    extraButton.className = 'grid-button extra-column-button';
-                    extraButton.style.width = `${leftoverWidth}px`; // Set the width to leftover space
-                    extraButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
-
-                    // Add click event listener to turn the button black
-                    extraButton.addEventListener('click', () => {
-                        extraButton.style.backgroundColor = 'black';
-                    });
-
-                    buttonContainer.appendChild(extraButton);
-                }
-            }
-
-            // Handle the corner button if both width and height have leftovers
-            if (leftoverWidth > 0 && leftoverHeight > 0) {
-                const cornerButton = document.createElement('button');
-                cornerButton.className = 'grid-button extra-column-button extra-row-button';
-                cornerButton.style.width = `${leftoverWidth}px`;
-                cornerButton.style.height = `${leftoverHeight}px`;
-                cornerButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
-
-                // Add click event listener to turn the button black
-                cornerButton.addEventListener('click', () => {
-                    cornerButton.style.backgroundColor = 'black';
-                });
-
-                buttonContainer.appendChild(cornerButton);
-            }
         }
 
         // Initialize button grid
@@ -130,4 +87,5 @@
         window.addEventListener('resize', createButtonGrid);
     </script>
 </body>
+
 </html>
