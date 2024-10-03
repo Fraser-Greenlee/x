@@ -24,8 +24,8 @@
             height: 120px;
             border: none;
         }
-        .extra-row-button {
-            height: auto; /* Allow this button to adjust height */
+        .extra-row-button, .extra-column-button {
+            height: auto; /* Allow these buttons to adjust height */
         }
     </style>
 </head>
@@ -49,15 +49,16 @@
             // Calculate the number of buttons that fit horizontally and vertically
             const cols = Math.floor(screenWidth / 120);
             const rows = Math.floor(screenHeight / 120);
+            const leftoverWidth = screenWidth % 120;
             const leftoverHeight = screenHeight % 120;
 
-            // Calculate the total number of buttons (for full rows)
+            // Calculate the total number of buttons (for full rows and columns)
             const totalButtons = cols * rows;
 
             // Clear any existing buttons (if resizing)
             buttonContainer.innerHTML = '';
 
-            // Create and append buttons for full rows
+            // Create and append buttons for full rows and columns
             for (let i = 0; i < totalButtons; i++) {
                 const button = document.createElement('button');
                 button.className = 'grid-button';
@@ -86,6 +87,39 @@
 
                     buttonContainer.appendChild(extraButton);
                 }
+            }
+
+            // If there is leftover width, create an extra column
+            if (leftoverWidth > 0) {
+                for (let i = 0; i < rows; i++) {
+                    const extraButton = document.createElement('button');
+                    extraButton.className = 'grid-button extra-column-button';
+                    extraButton.style.width = `${leftoverWidth}px`; // Set the width to leftover space
+                    extraButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
+
+                    // Add click event listener to turn the button black
+                    extraButton.addEventListener('click', () => {
+                        extraButton.style.backgroundColor = 'black';
+                    });
+
+                    buttonContainer.appendChild(extraButton);
+                }
+            }
+
+            // Handle the corner button if both width and height have leftovers
+            if (leftoverWidth > 0 && leftoverHeight > 0) {
+                const cornerButton = document.createElement('button');
+                cornerButton.className = 'grid-button extra-column-button extra-row-button';
+                cornerButton.style.width = `${leftoverWidth}px`;
+                cornerButton.style.height = `${leftoverHeight}px`;
+                cornerButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
+
+                // Add click event listener to turn the button black
+                cornerButton.addEventListener('click', () => {
+                    cornerButton.style.backgroundColor = 'black';
+                });
+
+                buttonContainer.appendChild(cornerButton);
             }
         }
 
