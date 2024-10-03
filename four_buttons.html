@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioned Buttons</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+            border: none;
+            padding: 0;
+        }
+
+        #topButton {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #bottomButton {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #leftButton {
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #rightButton {
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="topButton" class="button"></button>
+    <button id="bottomButton" class="button"></button>
+    <button id="leftButton" class="button"></button>
+    <button id="rightButton" class="button"></button>
+
+    <script>
+        const buttons = document.querySelectorAll('.button');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.style.backgroundColor = 'green';
+            });
+        });
+    </script>
+
+</body>
+
+</html>
