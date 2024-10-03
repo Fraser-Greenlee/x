@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Grid</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #button-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 120px);
+            grid-template-rows: repeat(auto-fill, 120px);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .grid-button {
+            width: 120px;
+            height: 120px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="button-container"></div>
+
+    <script>
+        // Function to generate random pastel colors
+        function getRandomPastelColor() {
+            const r = Math.floor((Math.random() * 127) + 128); // Random number between 128 and 255
+            const g = Math.floor((Math.random() * 127) + 128);
+            const b = Math.floor((Math.random() * 127) + 128);
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+
+        function createButtonGrid() {
+            const buttonContainer = document.getElementById('button-container');
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            // Calculate the number of buttons that fit horizontally and vertically
+            const cols = Math.floor(screenWidth / 120);
+            const rows = Math.floor(screenHeight / 120);
+
+            // Calculate the total number of buttons
+            const totalButtons = cols * rows;
+
+            // Clear any existing buttons (if resizing)
+            buttonContainer.innerHTML = '';
+
+            // Create and append buttons
+            for (let i = 0; i < totalButtons; i++) {
+                const button = document.createElement('button');
+                button.className = 'grid-button';
+                button.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
+
+                // Add click event listener to turn the button black
+                button.addEventListener('click', () => {
+                    button.style.backgroundColor = 'black';
+                });
+
+                buttonContainer.appendChild(button);
+            }
+        }
+
+        // Initialize button grid
+        createButtonGrid();
+
+        // Recalculate button grid on window resize
+        window.addEventListener('resize', createButtonGrid);
+    </script>
+</body>
+
+</html>
