@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Grid</title>
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
@@ -15,23 +13,22 @@
             justify-content: center;
             align-items: center;
         }
-
         #button-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, 120px);
-            grid-template-rows: repeat(auto-fill, 120px);
             width: 100vw;
             height: 100vh;
         }
-
         .grid-button {
             width: 120px;
             height: 120px;
             border: none;
         }
+        .extra-row-button {
+            height: auto; /* Allow this button to adjust height */
+        }
     </style>
 </head>
-
 <body>
     <div id="button-container"></div>
 
@@ -52,14 +49,15 @@
             // Calculate the number of buttons that fit horizontally and vertically
             const cols = Math.floor(screenWidth / 120);
             const rows = Math.floor(screenHeight / 120);
+            const leftoverHeight = screenHeight % 120;
 
-            // Calculate the total number of buttons
+            // Calculate the total number of buttons (for full rows)
             const totalButtons = cols * rows;
 
             // Clear any existing buttons (if resizing)
             buttonContainer.innerHTML = '';
 
-            // Create and append buttons
+            // Create and append buttons for full rows
             for (let i = 0; i < totalButtons; i++) {
                 const button = document.createElement('button');
                 button.className = 'grid-button';
@@ -72,6 +70,23 @@
 
                 buttonContainer.appendChild(button);
             }
+
+            // If there is leftover height, create an extra row
+            if (leftoverHeight > 0) {
+                for (let i = 0; i < cols; i++) {
+                    const extraButton = document.createElement('button');
+                    extraButton.className = 'grid-button extra-row-button';
+                    extraButton.style.height = `${leftoverHeight}px`; // Set the height to leftover space
+                    extraButton.style.backgroundColor = getRandomPastelColor(); // Set random pastel color
+
+                    // Add click event listener to turn the button black
+                    extraButton.addEventListener('click', () => {
+                        extraButton.style.backgroundColor = 'black';
+                    });
+
+                    buttonContainer.appendChild(extraButton);
+                }
+            }
         }
 
         // Initialize button grid
@@ -81,5 +96,4 @@
         window.addEventListener('resize', createButtonGrid);
     </script>
 </body>
-
 </html>
